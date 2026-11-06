@@ -357,6 +357,10 @@ dialog.lb p{color:#f4f3ea;margin:8px 0 0;font-size:14px;text-align:center}
   .proj-hero{padding-block:28px 24px}
 }
 
+.vid{display:grid;gap:10px}
+.vid video{width:100%;aspect-ratio:16/9;display:block;border:2px solid var(--ink);border-radius:12px;box-shadow:5px 6px 0 var(--ink);background:#000}
+.vid .src{margin:0;font-size:13px;color:var(--ink-soft)}
+video::cue{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
 .zoomer{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:0;transition:opacity .45s}
 .zoomer.on{opacity:1}
 
@@ -1229,7 +1233,7 @@ dialog.lb p{color:#f4f3ea;margin:8px 0 0;font-size:14px;text-align:center}
         {h:'Outcome',t:['Family members can follow training progress together with the patient, patients can train on their own with the gamified app, and doctors can connect by video and give remote recommendations.'],figs:[F('eas-scenario','Usage scenarios and design impact')]}
       ],
       reflect:[['My proudest achievement','Integrating the CTAR adjustable resistance device, serious game training and biofeedback into a de-medicalised swallowing rehabilitation experience.'],['Key learnings','Parkinson’s pathology and swallowing muscle coordination; how sEMG and NMES are applied in rehabilitation; human factors and age-friendly interaction for wearables; and the development process of a rehabilitation product system.'],['If I did it again','I would bring in hospital resources earlier and explore other types of dysphagia, such as post-stroke dysphagia and age-related swallowing decline.'],['Challenges','Patients were hard to reach, medical resources were limited and medical knowledge was a high barrier. I recruited family members of patients through social media, reached out to hospitals, physicians and researchers, and used expert lectures to fill gaps in medical knowledge.']]},
-    melody:{season:'秋',stats:[['3–6','the golden age for music enlightenment'],['12','interviews: experts, teachers, parents'],['3','learning modes: Create, Learn, Challenge'],['3','task-based user tests']],sname:'Autumn',name:'Melody Mate',c:'--autumn',l:'--autumn-l',d:'--autumn-d',dark:false,vb:'0 420 600 300',
+    melody:{video:{src:'video/melody-mate-promo.mp4',vtt:'video/melody-mate-promo.en.vtt',poster:'img/t/mel-promo-poster.jpg',len:'51 s'},season:'秋',stats:[['3–6','the golden age for music enlightenment'],['12','interviews: experts, teachers, parents'],['3','learning modes: Create, Learn, Challenge'],['3','task-based user tests']],sname:'Autumn',name:'Melody Mate',c:'--autumn',l:'--autumn-l',d:'--autumn-d',dark:false,vb:'0 420 600 300',
       one:'A smart interactive toy for early childhood music education (ages 3–6).',
       tags:'Music Education · Educational Toy · Multisensory Immersive Interaction · Gamified Learning',
       hero:F('mel-hero','Melody Mate with instrument tokens (render)'),
@@ -1278,7 +1282,7 @@ dialog.lb p{color:#f4f3ea;margin:8px 0 0;font-size:14px;text-align:center}
     document.getElementById('pCard').innerHTML=p.card.map(([k,v])=>'<dt>'+k+'</dt><dd>'+v+'</dd>').join('');
     document.getElementById('pStory').style.setProperty('--c','var('+p.c+')');
     const ps=document.getElementById('pStory');ps.style.setProperty('--cd','var('+p.d+')');ps.style.setProperty('--cl','var('+p.l+')');
-    ps.innerHTML='<div class="glance"><div class="stats">'+p.stats.map(([n,t])=>'<div class="stat"><b>'+n+'</b><span>'+t+'</span></div>').join('')+'</div><nav class="steps" aria-label="Jump to a section">'+p.story.map((s,i)=>'<button type="button" data-sec="'+i+'">'+s.h+'</button>').join('<i>→</i>')+'<i>→</i><button type="button" data-sec="'+p.story.length+'">Reflection</button></nav></div><p class="lead">'+p.lead+'</p>'+p.story.map((s,i)=>'<section id="sec-'+i+'"><h2>'+s.h+'</h2>'+s.t.map(t=>'<p>'+t+'</p>').join('')+(s.q?'<blockquote class="quote">'+s.q+'</blockquote>':'')+figs(s.figs,s.two)+(s.after?'<p>'+s.after+'</p>':'')+figs(s.figs2,true)+'</section>').join('')
+    ps.innerHTML='<div class="glance"><div class="stats">'+p.stats.map(([n,t])=>'<div class="stat"><b>'+n+'</b><span>'+t+'</span></div>').join('')+'</div><nav class="steps" aria-label="Jump to a section">'+p.story.map((s,i)=>'<button type="button" data-sec="'+i+'">'+s.h+'</button>').join('<i>→</i>')+'<i>→</i><button type="button" data-sec="'+p.story.length+'">Reflection</button></nav></div><p class="lead">'+p.lead+'</p>'+(p.video?'<section class="vid" aria-label="Project film"><h2>Watch · '+p.video.len+'</h2><video controls preload="none" playsinline poster="'+p.video.poster+'"><source src="'+p.video.src+'" type="video/mp4"><track kind="captions" srclang="en" label="English" src="'+p.video.vtt+'" default></video><p class="src">English voiceover. Captions follow the BBC Subtitle Guidelines and can be switched off in the player.</p></section>':'')+p.story.map((s,i)=>'<section id="sec-'+i+'"><h2>'+s.h+'</h2>'+s.t.map(t=>'<p>'+t+'</p>').join('')+(s.q?'<blockquote class="quote">'+s.q+'</blockquote>':'')+figs(s.figs,s.two)+(s.after?'<p>'+s.after+'</p>':'')+figs(s.figs2,true)+'</section>').join('')
       +'<section id="sec-'+p.story.length+'"><h2>Reflection</h2><div class="reflect">'+p.reflect.map(([k,v])=>'<p><b>'+k+'.</b> '+v+'</p>').join('')+'</div></section>';
     const i=ORDER.indexOf(id), prev=ORDER[(i+3)%4], next=ORDER[(i+1)%4];
     document.getElementById('pPager').innerHTML='<a href="#'+prev+'">← '+P[prev].season+' · '+P[prev].name+'</a><a href="#garden">Back to the garden</a><a href="#'+next+'">'+P[next].season+' · '+P[next].name+' →</a>';
